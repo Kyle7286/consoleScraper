@@ -33,7 +33,7 @@ let report = {
 
 
 
-getAvailability();
+
 
 // GAMESTOP - Digital & Standard Edition
 const getGameStop_PS5 = async (url) => {
@@ -67,3 +67,5 @@ const getAvailability = async () => {
 
     console.log(report);
 }
+
+getAvailability();
