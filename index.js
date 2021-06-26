@@ -32,8 +32,11 @@ let report = {
 };
 
 
+
+getAvailability();
+
 // GAMESTOP - Digital & Standard Edition
-const getDigitalPS5_GameStop = async (url) => {
+const getGameStop_PS5 = async (url) => {
     try {
         const browser = await puppeteer.launch({ headless: true });
         const page = await browser.newPage();
@@ -56,31 +59,11 @@ const getDigitalPS5_GameStop = async (url) => {
 }
 
 
-getDigitalPS5_GameStop(url_gameStop_playstation_dig)
-getDigitalPS5_GameStop(url_gameStop_playstation_stan)
 
 
+const getAvailability = async () => {
+    report.playstation.gamestop.dig = await getGameStop_PS5(url_gameStop_playstation_dig)
+    report.playstation.gamestop.stan = await getGameStop_PS5(url_gameStop_playstation_stan)
 
-
-
-
-
-
-
-// const puppeteer = require('puppeteer');
-
-// async function scrapePage(url) {
-//     const browser = await puppeteer.launch();
-//     // const page = await browser.newPage();
-//     // await page.goto(url);
-
-//     // const [el] = await page.$x('//*[@id="add-to-cart"]')
-//     // const src = await el.getProperty('class');
-//     // const srcTxt = await src.jsonValue();
-
-//     // console.log({srcTxt});
-
-// }
-
-
-// scrapePage(url2)
+    console.log(report);
+}
