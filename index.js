@@ -32,27 +32,44 @@ let report = {
 };
 
 
-
-
+// ---------------------------------------------------
+//                  SCRAPERS
+// ---------------------------------------------------
 
 // GAMESTOP - Digital & Standard Edition
+//  * This function will grab the availability of the PS5 from Gamestop websites
 const getGameStop_PS5 = async (url) => {
     try {
+        // Create a browser session with headless true so the browser doesnt show (think silent mode)
         const browser = await puppeteer.launch({ headless: true });
+
+        // Create a new page
         const page = await browser.newPage();
+
+        // Set userAgent so that websites don't block you
         page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36')
+
+        // Visit the website
         await page.goto(url)
 
+        // Wait for the element we are interested in to load
         await page.waitForSelector('#add-to-cart');
-        await page.screenshot({ path: 'gamestop_digital.png' });
 
+        // // Take a screenshot of the page
+        // await page.screenshot({ path: 'gamestop_digital.png' });
+
+        // Get the attribute data of the element
         const obj = await page.evaluate('document.querySelector("#add-to-cart").getAttribute("data-gtmdata")')
-        const avail = JSON.parse(obj).productInfo.availability
-        console.log(avail);
 
+        // parse to an object and grab the value we want
+        const avail = JSON.parse(obj).productInfo.availability
+
+        // Close the browser session
         await browser.close()
 
+        // Return the result
         return avail
+        
     } catch (e) {
         console.log('Error', e);
     }
@@ -60,6 +77,10 @@ const getGameStop_PS5 = async (url) => {
 
 
 
+
+// ---------------------------------------------------
+//                  Init Function
+// ---------------------------------------------------
 
 const getAvailability = async () => {
     report.playstation.gamestop.dig = await getGameStop_PS5(url_gameStop_playstation_dig)
