@@ -23,7 +23,7 @@ const getTarget_PS5 = async (url) => {
         const avail = await page.evaluate(() => {
 
             let element = document.querySelector(".h-text-orangeDark");
-            return element ? element.innerText: null;
+            return element ? element.innerText : null;
 
         })
 

@@ -74,10 +74,15 @@ const getGameStop_PS5 = async (url) => {
         // await page.screenshot({ path: 'gamestop_digital.png' });
 
         // Get the attribute data of the element
-        const obj = await page.evaluate('document.querySelector("#add-to-cart").getAttribute("data-gtmdata")')
+        const avail = await page.evaluate(() => {
+            
+            let element = document.querySelector("#add-to-cart").getAttribute("data-gtmdata")
+            let availability = JSON.parse(element).productInfo.availability
 
-        // parse to an object and grab the value we want
-        const avail = JSON.parse(obj).productInfo.availability
+            // parse data-attribute to an object and grab the value we want
+            return availability === "Not Available" ? "Not Available" : null;
+
+    })
 
         // Close the browser session
         await browser.close()
@@ -211,12 +216,12 @@ const getAvailability = async () => {
 
     console.log("======" + "GAMESTOP" + "======");
     if (gx != "Not Available") {
-        console.log("Standard: " + chalk.green(gx));
+        console.log("Standard: " + chalk.green(url_gameStop_playstation_stan));
     } else {
         console.log("Standard: " + chalk.red(gx));
     }
     if (gy != "Not Available") {
-        console.log("Digital: " + chalk.green(gy));
+        console.log("Digital: " + chalk.green(url_gameStop_playstation_dig));
     } else {
         console.log("Digital: " + chalk.red(gy));
     }
@@ -253,13 +258,13 @@ const getAvailability = async () => {
 
     console.log("======" + "TARGET" + "======");
     if (tx != "Sold out") {
-        console.log("Standard: " + chalk.green(tx));
+        console.log("Standard: " + chalk.green(url_target_playstation_stan));
 
     } else {
         console.log("Standard: " + chalk.red(tx));
     }
     if (ty != "Sold out") {
-        console.log("Digital: " + chalk.green(ty));
+        console.log("Digital: " + chalk.green(url_target_playstation_dig));
 
     } else {
         console.log("Digital: " + chalk.red(ty));
