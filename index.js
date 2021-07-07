@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
-const chalk = require('chalk')
-
+const chalk = require('chalk');
+const nodemailer = require('nodemailer');
+require('dotenv').config();
 
 // ---------------------------------------------------
 //                  URLs
@@ -258,7 +259,7 @@ const getAvailability = async () => {
     console.log("");
 
 
-    // // Target
+    // Target
     let tx = await getTarget_PS5(url_target_playstation_stan)
     let ty = await getTarget_PS5(url_target_playstation_dig)
     report.playstation.target.stan = tx
@@ -287,7 +288,7 @@ const getAvailability = async () => {
     // console.log(report);
 
 
-
+    sendEmail();
 
 
     console.log("Sleeping...");
@@ -297,6 +298,40 @@ const getAvailability = async () => {
     }, 10000);
 
 }
+
+const sendEmail = () => {
+
+    // Auth
+    const transporter = nodemailer.createTransport({
+        service: "hotmail",
+        auth: {
+            user: process.env.USER,
+            pass: process.env.PASS
+        }
+    })
+
+
+    // Options
+    const options = {
+        from: process.env.USER,
+        to: process.env.TO,
+        subject: "Test Email",
+        text: "This is a test email from my node application."
+
+    };
+
+    transporter.sendMail(options, (err, info) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.log("Sent: " + info.response);
+    })
+
+
+}
+
+
 
 
 // Init
