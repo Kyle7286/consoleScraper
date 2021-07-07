@@ -11,6 +11,7 @@ url_gameStop_playstation_dig = "https://www.gamestop.com/video-games/playstation
 url_gameStop_playstation_stan = "https://www.gamestop.com/video-games/playstation-5/consoles/products/playstation-5/11108140.html?condition=New"
 
 // BestBuy
+// url_bestBuy_playstation_stan = "https://www.bestbuy.com/site/sony-playstation-pulse-3d-wireless-headset-compatible-for-both-playstation-4-playstation-5-white/6430164.p?skuId=6430164"
 url_bestBuy_playstation_stan = "https://www.bestbuy.com/site/sony-playstation-5-console/6426149.p?skuId=6426149"
 url_bestBuy_playstation_dig = "https://www.bestbuy.com/site/sony-playstation-5-digital-edition-console/6430161.p?skuId=6430161"
 
@@ -70,19 +71,16 @@ const getGameStop_PS5 = async (url) => {
         // Wait for the element we are interested in to load
         await page.waitForSelector('#add-to-cart');
 
-        // // Take a screenshot of the page
-        // await page.screenshot({ path: 'gamestop_digital.png' });
-
         // Get the attribute data of the element
         const avail = await page.evaluate(() => {
-            
+
             let element = document.querySelector("#add-to-cart").getAttribute("data-gtmdata")
             let availability = JSON.parse(element).productInfo.availability
 
             // parse data-attribute to an object and grab the value we want
             return availability === "Not Available" ? "Not Available" : null;
 
-    })
+        })
 
         // Close the browser session
         await browser.close()
@@ -109,16 +107,19 @@ const getBestBuy_PS5 = async (url) => {
         page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36')
 
         // Visit the website
-        await page.goto(url)
+        await page.goto(url);
 
         // Wait for the element we are interested in to load
         await page.waitForSelector('.add-to-cart-button');
 
         // Get the attribute data of the element
-        const avail = await page.evaluate('document.querySelector(".add-to-cart-button").innerHTML')
+        const avail = await page.evaluate(() => {
+            let element = document.querySelector(".add-to-cart-button").innerHTML;
+            return element === "Sold Out" ? element : null;
+        })
 
         // Close the browser session
-        await browser.close()
+        await browser.close();
 
         // Return the result
         return avail
@@ -217,11 +218,14 @@ const getAvailability = async () => {
     console.log("======" + "GAMESTOP" + "======");
     if (gx != "Not Available") {
         console.log("Standard: " + chalk.green(url_gameStop_playstation_stan));
+        report.playstation.gamestop.stan = url_gameStop_playstation_stan;
+
     } else {
         console.log("Standard: " + chalk.red(gx));
     }
     if (gy != "Not Available") {
         console.log("Digital: " + chalk.green(url_gameStop_playstation_dig));
+        report.playstation.gamestop.stan = url_gameStop_playstation_dig;
     } else {
         console.log("Digital: " + chalk.red(gy));
     }
@@ -237,12 +241,16 @@ const getAvailability = async () => {
 
     console.log("======" + "BESTBUY" + "======");
     if (bx != "Sold Out") {
-        console.log("Standard: " + chalk.green(bx));
+        console.log("Standard: " + chalk.green(url_bestBuy_playstation_stan));
+        report.playstation.bestbuy.stan = url_bestBuy_playstation_stan;
+
     } else {
         console.log("Standard: " + chalk.red(bx));
     }
     if (by != "Sold Out") {
-        console.log("Digital: " + chalk.green(by));
+        console.log("Digital: " + chalk.green(url_bestBuy_playstation_dig));
+        report.playstation.bestbuy.dig = url_bestBuy_playstation_dig;
+
     } else {
         console.log("Digital: " + chalk.red(by));
     }
@@ -259,19 +267,20 @@ const getAvailability = async () => {
     console.log("======" + "TARGET" + "======");
     if (tx != "Sold out") {
         console.log("Standard: " + chalk.green(url_target_playstation_stan));
-
+        report.playstation.target.stan = url_target_playstation_stan;
     } else {
         console.log("Standard: " + chalk.red(tx));
     }
     if (ty != "Sold out") {
         console.log("Digital: " + chalk.green(url_target_playstation_dig));
-
+        report.playstation.target.dig = url_target_playstation_dig;
     } else {
         console.log("Digital: " + chalk.red(ty));
     }
     console.log("==================");
 
-
+    // Log Report object
+    // console.log(report);
 
     // Amazon
     // report.playstation.amazon.stan = await getAmazon_PS5(url_amazon_playstation_stan)
