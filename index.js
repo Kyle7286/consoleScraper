@@ -35,19 +35,19 @@ url_amazon_playstation_stan = "https://www.amazon.com/PlayStation-5-Console/dp/B
 
 // GAMESTOP - Digital & Standard Edition
 //  * This function will grab the availability of the PS5
-const getGameStop_PS5 = async (url) => {
+const getGameStop_PS5 = async (page) => {
     try {
-        // Create a browser session with headless true so the browser doesnt show (think silent mode)
-        const browser = await puppeteer.launch({ headless: true });
+        // // Create a browser session with headless true so the browser doesnt show (think silent mode)
+        // const browser = await puppeteer.launch({ headless: true });
 
-        // Create a new page
-        const page = await browser.newPage();
+        // // Create a new page
+        // const page = await browser.newPage();
 
-        // Set userAgent so that websites don't block you
-        page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36')
+        // // Set userAgent so that websites don't block you
+        // page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36')
 
-        // Visit the website
-        await page.goto(url)
+        // // Visit the website
+        // await page.goto(url)
 
         // Wait for the element we are interested in to load
         await page.waitForSelector('#add-to-cart');
@@ -63,8 +63,8 @@ const getGameStop_PS5 = async (url) => {
 
         })
 
-        // Close the browser session
-        await browser.close()
+        // // Close the browser session
+        // await browser.close()
 
         // Return the result
         return avail
@@ -76,19 +76,19 @@ const getGameStop_PS5 = async (url) => {
 
 // BESTBUY - Digital & Standard Edition
 //  * This function will grab the availability of the PS5
-const getBestBuy_PS5 = async (url) => {
+const getBestBuy_PS5 = async (page) => {
     try {
-        // Create a browser session with headless true so the browser doesnt show (think silent mode)
-        const browser = await puppeteer.launch({ headless: true });
+        // // Create a browser session with headless true so the browser doesnt show (think silent mode)
+        // const browser = await puppeteer.launch({ headless: true });
 
-        // Create a new page
-        const page = await browser.newPage();
+        // // Create a new page
+        // const page = await browser.newPage();
 
-        // Set userAgent so that websites don't block you
-        page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36')
+        // // Set userAgent so that websites don't block you
+        // page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36')
 
-        // Visit the website
-        await page.goto(url);
+        // // Visit the website
+        // await page.goto(url);
 
         // Wait for the element we are interested in to load
         await page.waitForSelector('.add-to-cart-button');
@@ -99,8 +99,8 @@ const getBestBuy_PS5 = async (url) => {
             return element === "Sold Out" ? false : true;
         })
 
-        // Close the browser session
-        await browser.close();
+        // // Close the browser session
+        // await browser.close();
 
         // Return the result
         return avail
@@ -112,19 +112,19 @@ const getBestBuy_PS5 = async (url) => {
 
 // TARGET - Digital & Standard Edition
 //  * This function will grab the availability of the PS5
-const getTarget_PS5 = async (url) => {
+const getTarget_PS5 = async (page) => {
     try {
-        // Create a browser session with headless true so the browser doesnt show (think silent mode)
-        const browser = await puppeteer.launch({ headless: true });
+        // // Create a browser session with headless true so the browser doesnt show (think silent mode)
+        // const browser = await puppeteer.launch({ headless: true });
 
-        // Create a new page
-        const page = await browser.newPage();
+        // // Create a new page
+        // const page = await browser.newPage();
 
-        // Set userAgent so that websites don't block you
-        page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36')
+        // // Set userAgent so that websites don't block you
+        // page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36')
 
-        // Visit the website
-        await page.goto(url)
+        // // Visit the website
+        // await page.goto(url)
 
         // Wait for the element we are interested in to load
         await page.waitForSelector('[data-test="flexible-fulfillment"]');
@@ -139,8 +139,8 @@ const getTarget_PS5 = async (url) => {
 
         })
 
-        // Close the browser session
-        await browser.close()
+        // // Close the browser session
+        // await browser.close()
 
         // Return the result
         return avail
@@ -152,16 +152,16 @@ const getTarget_PS5 = async (url) => {
 
 // AMAZON - Digital & Standard Edition
 //  * This function will grab the availability of the PS5
-const getAmazon_PS5 = async (url) => {
+const getAmazon_PS5 = async (page) => {
     try {
-        // Create a browser session with headless true so the browser doesnt show (think silent mode)
-        const browser = await puppeteer.launch({ headless: true });
+        // // Create a browser session with headless true so the browser doesnt show (think silent mode)
+        // const browser = await puppeteer.launch({ headless: true });
 
-        // Create a new page
-        const page = await browser.newPage();
+        // // Create a new page
+        // const page = await browser.newPage();
 
-        // Set userAgent so that websites don't block you
-        page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36')
+        // // Set userAgent so that websites don't block you
+        // page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36')
 
         // Visit the website
         await page.goto(url)
@@ -172,8 +172,8 @@ const getAmazon_PS5 = async (url) => {
         // Get the attribute data of the element
         const avail = await page.evaluate('document.querySelector("#availability.span").')
 
-        // Close the browser session
-        await browser.close()
+        // // Close the browser session
+        // await browser.close()
 
         // Return the result
         return avail
@@ -206,9 +206,54 @@ const getAvailability = async () => {
     console.log("")
 
 
-    // Gamestop
-    let gx = await getGameStop_PS5(url_gameStop_playstation_stan)
-    let gy = await getGameStop_PS5(url_gameStop_playstation_dig)
+    // Create a browser session with headless true so the browser doesnt show (think silent mode)
+    const browser = await puppeteer.launch({ headless: false });
+
+    // Open a tab for each link
+    const page_gs_stan = await browser.newPage();
+    const page_gs_dig = await browser.newPage();
+
+    const page_bb_stan = await browser.newPage();
+    const page_bb_dig = await browser.newPage();
+
+    const page_tar_stan = await browser.newPage();
+    const page_tar_dig = await browser.newPage();
+
+    // Set the user agent to mimic an actual user and not a robot so the websites don't know, haha!
+    let userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36'
+
+    // Set userAgent so that websites don't block you
+    page_gs_stan.setUserAgent(userAgent)
+    page_gs_dig.setUserAgent(userAgent)
+
+    page_bb_stan.setUserAgent(userAgent)
+    page_bb_dig.setUserAgent(userAgent)
+
+    page_tar_stan.setUserAgent(userAgent)
+    page_tar_dig.setUserAgent(userAgent)
+
+    // Navigate to each URL
+    await page_gs_stan.goto(url_gameStop_playstation_stan)
+    await page_gs_dig.goto(url_gameStop_playstation_dig)
+
+    await page_bb_stan.goto(url_bestBuy_playstation_stan)
+    await page_bb_dig.goto(url_bestBuy_playstation_dig)
+
+    await page_tar_stan.goto(url_target_playstation_stan)
+    await page_tar_dig.goto(url_target_playstation_dig)
+
+    // Get Result back from GameStop
+    let gx = await getGameStop_PS5(page_gs_stan)
+    let gy = await getGameStop_PS5(page_gs_dig)
+
+    // Get Result back from Bestbuy
+    let bx = await getBestBuy_PS5(page_bb_stan)
+    let by = await getBestBuy_PS5(page_bb_dig)
+
+    // Get Result back from Target
+    let tx = await getTarget_PS5(page_tar_stan)
+    let ty = await getTarget_PS5(page_tar_dig)
+
 
     report.gamestop_ps_stan = false
     report.gamestop_ps_dig = false
@@ -232,9 +277,9 @@ const getAvailability = async () => {
     console.log("==================");
     console.log("");
 
-    // // Bestbuy
-    let bx = await getBestBuy_PS5(url_bestBuy_playstation_stan)
-    let by = await getBestBuy_PS5(url_bestBuy_playstation_dig)
+    // // // Bestbuy
+    // let bx = await getBestBuy_PS5(url_bestBuy_playstation_stan)
+    // let by = await getBestBuy_PS5(url_bestBuy_playstation_dig)
 
     report.bestbuy_ps_stan = false
     report.bestbuy_ps_dig = false
@@ -260,9 +305,10 @@ const getAvailability = async () => {
     console.log("");
 
 
-    // Target
-    let tx = await getTarget_PS5(url_target_playstation_stan)
-    let ty = await getTarget_PS5(url_target_playstation_dig)
+    // // Target
+    // let tx = await getTarget_PS5(url_target_playstation_stan)
+    // let ty = await getTarget_PS5(url_target_playstation_dig)
+
     report.target_ps_stan = false
     report.target_ps_dig = false
 
@@ -295,9 +341,10 @@ const getAvailability = async () => {
     // console.log(report);
 
     // Send email results if a console was found
-    if (consoleAvailable) { sendEmail(report); }
+    // if (consoleAvailable) { sendEmail(report); }
 
-
+    // // Close the browser session
+    await browser.close()
 
 
     console.log("Sleeping...");
